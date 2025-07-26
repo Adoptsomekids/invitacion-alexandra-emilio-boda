@@ -3,8 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Boda de Emilio y Alexandra</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Montserrat:wght@300;400;700&display=swap" rel="stylesheet">
+    <title>Boda de Alexandra & Emilio</title>
+
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💖</text></svg>">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Montserrat:wght@300;400;700&family=Parisienne&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
     <style>
         :root {
             --primary-color: #f7e6e6; /* Rosa muy claro */
@@ -13,8 +17,13 @@
             --light-text-color: #555;
             --white: #fff;
             --background-floral: url('https://via.placeholder.com/1920x1080/f7e6e6/d4af37?text=Fondo+Floral'); /* Placeholder, ¡reemplaza! */
-            --couple-photo: url('https://via.placeholder.com/800x600?text=Foto+de+Emilio+y+Alexandra'); /* Placeholder, ¡reemplaza! */
+            --couple-photo: url('https://via.placeholder.com/800x600?text=Foto+de+Alexandra+y+Emilio'); /* Placeholder, ¡reemplaza! */
         }
+
+        /* Puedes subir tus imágenes a una carpeta 'images' en tu repositorio de GitHub */
+        /* Ejemplo de URL para GitHub Raw Content: https://raw.githubusercontent.com/TU_USUARIO/TU_REPOSITORIO/main/images/nombre-de-tu-imagen.jpg */
+        /* Asegúrate de reemplazar los placeholders con tus URLs reales */
+
 
         * {
             margin: 0;
@@ -66,6 +75,84 @@
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
         }
 
+        /* Splash Screen */
+        #splash-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.95) var(--background-floral) no-repeat center center/cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 1s ease-out, visibility 1s ease-out;
+            flex-direction: column;
+            overflow: hidden; /* Evita desbordamientos durante las animaciones */
+        }
+
+        #splash-screen.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .splash-content {
+            background: var(--white);
+            padding: 50px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            text-align: center;
+            max-width: 90%;
+            transform: scale(0.8); /* Inicia más pequeño */
+            opacity: 0;
+            animation: popIn 0.8s forwards cubic-bezier(0.68, -0.55, 0.27, 1.55); /* Animación más elástica */
+        }
+
+        @keyframes popIn {
+            0% { transform: scale(0.8); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        .splash-content h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5em;
+            margin-bottom: 10px;
+            color: var(--light-text-color);
+        }
+
+        .splash-content .names-signature {
+            font-family: 'Parisienne', cursive;
+            font-size: 4em;
+            color: var(--secondary-color);
+            margin-bottom: 30px;
+            line-height: 1;
+        }
+         .splash-content .names-signature span {
+            display: block; /* Para que cada nombre esté en su propia línea */
+            text-align: center;
+        }
+
+        .open-button {
+            display: inline-block;
+            background-color: var(--secondary-color);
+            color: var(--white);
+            padding: 15px 40px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 1.2em;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .open-button:hover {
+            background-color: #c09f2c;
+            transform: translateY(-3px);
+        }
+
         /* Hero Section (Bienvenida) */
         #hero {
             height: 100vh;
@@ -88,6 +175,7 @@
             width: 100%;
             height: 100%;
             background: rgba(0, 0, 0, 0.3);
+            z-index: 1;
         }
 
         #hero .container {
@@ -110,19 +198,54 @@
             margin-top: 15px;
             animation: fadeIn 2.5s ease-in-out;
         }
+        
+        #hero .date-location {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5em;
+            font-weight: 400;
+        }
+
+        /* Separadores Decorativos (para simular el estilo de las imágenes) */
+        .decorative-separator {
+            width: 100%;
+            height: 150px; /* Altura del decorado */
+            background: var(--background-floral) no-repeat center center/cover;
+            background-attachment: fixed; /* Efecto parallax */
+            position: relative;
+            z-index: 0;
+            opacity: 0.8;
+            margin-top: -50px; /* Superpone un poco con la sección anterior */
+            margin-bottom: -50px; /* Superpone un poco con la sección siguiente */
+        }
+        /* Ajuste para que el separador tenga bordes definidos o sea más visual */
+        .decorative-separator::before, .decorative-separator::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            width: 100%;
+            height: 50px; /* Altura del "borde" floral */
+            background-image: linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,1)); /* Sutil degradado blanco */
+            z-index: 1;
+        }
+        .decorative-separator::before {
+            top: 0;
+            transform: rotate(180deg);
+        }
+        .decorative-separator::after {
+            bottom: 0;
+        }
+
 
         /* Historia de Amor */
         #historia {
             background: var(--primary-color);
-            background-image: var(--background-floral);
-            background-repeat: no-repeat;
-            background-position: center center;
-            background-size: cover;
-            padding-bottom: 120px; /* Espacio para parallax */
+            padding-bottom: 80px;
         }
 
         #historia .container {
-            background: rgba(255, 255, 255, 0.9);
+            background: rgba(255, 255, 255, 0.95);
+            padding: 50px;
+            border-radius: 15px;
         }
 
         .story-item {
@@ -130,6 +253,15 @@
             padding: 20px;
             border-left: 5px solid var(--secondary-color);
             text-align: left;
+            position: relative;
+        }
+        .story-item::before {
+            content: '❤'; /* Pequeño corazón como bullet point */
+            position: absolute;
+            left: -30px; /* Ajusta la posición del corazón */
+            top: 15px;
+            font-size: 1.5em;
+            color: var(--secondary-color);
         }
 
         .story-item h3 {
@@ -137,10 +269,64 @@
             margin-bottom: 10px;
         }
 
+        .story-item .story-image {
+            width: 100%;
+            max-width: 400px; /* Tamaño máximo para las imágenes de historia */
+            height: auto;
+            border-radius: 10px;
+            margin: 20px auto; /* Centra la imagen y da espacio */
+            display: block;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+        .story-item .story-image:hover {
+            transform: scale(1.02);
+        }
+
+
+        /* Cuenta Regresiva */
+        #countdown {
+            background: var(--white);
+            padding: 80px 20px;
+        }
+        #countdown .container {
+            background: rgba(255, 255, 255, 0.95);
+        }
+
+        .countdown-timer {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 40px;
+            flex-wrap: wrap; /* Para responsividad */
+        }
+
+        .countdown-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-family: 'Playfair Display', serif;
+            font-size: 3em;
+            color: var(--text-color);
+        }
+
+        .countdown-item span {
+            font-size: 0.4em;
+            text-transform: uppercase;
+            color: var(--light-text-color);
+            margin-top: 5px;
+        }
+
         /* Detalles del Evento */
         #detalles {
-            background: var(--white);
-            padding-bottom: 120px;
+            background: var(--primary-color); /* Fondo alterno para contraste */
+            padding-bottom: 80px;
+        }
+
+        #detalles .container {
+             background: rgba(255, 255, 255, 0.95);
+             padding: 50px;
+             border-radius: 15px;
         }
 
         .detail-item {
@@ -158,6 +344,7 @@
 
         .detail-item h3 {
             margin-bottom: 10px;
+            color: var(--light-text-color);
         }
 
         .detail-item p {
@@ -177,14 +364,13 @@
         /* Confirmación de Asistencia */
         #rsvp {
             background: var(--primary-color);
-            background-image: var(--background-floral);
-            background-repeat: no-repeat;
-            background-position: center center;
-            background-size: cover;
+            padding-bottom: 80px;
         }
 
         #rsvp .container {
-             background: rgba(255, 255, 255, 0.9);
+             background: rgba(255, 255, 255, 0.95);
+             padding: 50px;
+             border-radius: 15px;
         }
 
         .rsvp-button {
@@ -198,6 +384,7 @@
             margin-top: 30px;
             transition: background-color 0.3s ease, transform 0.3s ease;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            font-family: 'Montserrat', sans-serif;
         }
 
         .rsvp-button:hover {
@@ -233,11 +420,6 @@
             background-size: cover;
         }
 
-        #historia, #detalles, #rsvp {
-            position: relative;
-            z-index: 1;
-        }
-
         /* Media Queries para Responsividad */
         @media (max-width: 768px) {
             h1 { font-size: 2.8em; }
@@ -248,6 +430,9 @@
             .container { padding: 25px; }
             .rsvp-button { padding: 12px 25px; font-size: 1em; }
             .story-item, .detail-item { text-align: center; border-left: none; }
+            .story-item::before { left: 50%; transform: translateX(-50%); top: -10px; } /* Centra el corazón en móviles */
+            .countdown-item { font-size: 2.5em; gap: 15px; }
+            .story-item .story-image { max-width: 90%; }
         }
 
         @media (max-width: 480px) {
@@ -257,130 +442,240 @@
             #hero p { font-size: 1.2em; }
             section { padding: 40px 10px; }
             .container { padding: 20px; }
+            .splash-content .names-signature { font-size: 3em; }
+            .countdown-item { font-size: 2em; }
         }
     </style>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
 
-    <section id="hero" class="visible">
-        <div class="container">
-            <h1>Emilio & Alexandra</h1>
-            <p>¡Nos Casamos!</p>
-            <p class="date-location">04 de enero del 2026</p>
-            <p class="date-location location-placeholder">📍 [Ubicación de la Boda]</p>
+    <div id="splash-screen">
+        <div class="splash-content">
+            <h2>BODA</h2>
+            <div class="names-signature">
+                <span>Alexandra</span>
+                <span>&</span>
+                <span>Emilio</span>
+            </div>
+            <button id="open-invitation-button" class="open-button">Abrir Invitación</button>
         </div>
-    </section>
+    </div>
 
-    <section id="historia">
-        <div class="container">
-            <h2>Nuestra Historia de Amor</h2>
-            <div class="story-item">
-                <h3>El Comienzo</h3>
-                <p>Nuestra historia comenzó con una conexión inesperada, un cruce de caminos que transformó nuestras vidas para siempre. Desde el primer momento, supimos que estábamos destinados a algo especial.</p>
-            </div>
-            <div class="story-item">
-                <h3>Momentos Inolvidables</h3>
-                <p>A lo largo de los años, hemos compartido risas, aventuras y desafíos que solo han fortalecido nuestro vínculo. Cada experiencia nos ha acercado más, construyendo un amor sólido y verdadero.</p>
-            </div>
-            <div class="story-item">
-                <h3>El Gran Paso</h3>
-                <p>Con el corazón lleno de alegría, hemos decidido unir nuestras vidas para siempre. Estamos emocionados de comenzar este nuevo capítulo y de celebrarlo con ustedes, nuestros seres queridos.</p>
-            </div>
-        </div>
-    </section>
+    <main id="main-content" style="display: none;">
 
-    <section id="detalles">
-        <div class="container">
-            <h2>Detalles del Evento</h2>
-            <div class="detail-item">
-                <i class="fas fa-calendar-alt"></i>
-                <h3>Fecha</h3>
-                <p>Sábado, 04 de enero del 2026</p>
-                <p>A partir de las [Hora de la Ceremonia]</p>
+        <section id="hero" class="visible">
+            <div class="container">
+                <h1>Alexandra & Emilio</h1>
+                <p>¡Nos Casamos!</p>
+                <p class="date-location">04 de enero del 2026</p>
+                <p class="date-location">📍 Finca Montebello</p>
             </div>
-            <div class="detail-item">
-                <i class="fas fa-map-marker-alt"></i>
-                <h3>Ubicación</h3>
-                <p><strong>[Nombre del Lugar de la Boda]</strong></p>
-                <p>[Dirección Completa del Lugar]</p>
-                <p class="location-placeholder">[Ciudad, País]</p>
-                <iframe
-                    class="location-map"
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3000000.0!2d-102.0!3d23.0!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTPCsDQ5JzQ0LjMiTiAxMDDCsDE1JzM2LjYiVw!5e0!3m2!1ses!2smx!4v1678901234567!5m2!1ses!2smx"
-                    allowfullscreen=""
-                    loading="lazy"
-                    referrerpolicy="no-referrer-when-downgrade"
-                ></iframe>
-                <small>Haga clic en el mapa para ver la ubicación</small>
-            </div>
-            <div class="detail-item">
-                <i class="fas fa-cocktail"></i>
-                <h3>Recepción</h3>
-                <p>Inmediatamente después de la ceremonia en el mismo lugar.</p>
-                <p>¡Prepárense para celebrar!</p>
-            </div>
-        </div>
-    </section>
+        </section>
 
-    <section id="rsvp">
-        <div class="container">
-            <h2>Confirmación de Asistencia</h2>
-            <p>¡Su presencia es el mejor regalo! Por favor, ayúdennos a planificar nuestro gran día confirmando su asistencia.</p>
-            <p>Agradecemos su pronta respuesta.</p>
-            <a href="[ENLACE_A_FORMULARIO_DE_CONFIRMACION]" target="_blank" class="rsvp-button">
-                Confirmar Asistencia
-            </a>
-            <p style="margin-top: 20px; font-size: 0.9em;">Fecha límite para confirmar: [Fecha Límite]</p>
-        </div>
-    </section>
+        <div class="decorative-separator"></div>
+
+        <section id="historia">
+            <div class="container">
+                <h2>Nuestra Historia de Amor</h2>
+                
+                <div class="story-item">
+                    <h3>El Comienzo</h3>
+                    <p>Nuestra historia comenzó con una conexión inesperada, un cruce de caminos que transformó nuestras vidas para siempre. Desde el primer momento, supimos que estábamos destinados a algo especial.</p>
+                    <img src="https://via.placeholder.com/400x250?text=Foto+El+Comienzo" alt="Foto del inicio de nuestra historia" class="story-image">
+                </div>
+                
+                <div class="story-item">
+                    <h3>Momentos Inolvidables</h3>
+                    <p>A lo largo del tiempo, hemos compartido risas, aventuras y desafíos que solo han fortalecido nuestro vínculo. Cada experiencia nos ha acercado más, construyendo un amor sólido y verdadero.</p>
+                    <img src="https://via.placeholder.com/400x250?text=Foto+Momentos+Inolvidables" alt="Foto de momentos especiales" class="story-image">
+                </div>
+                
+                <div class="story-item">
+                    <h3>El Gran Paso</h3>
+                    <p>Con el corazón lleno de alegría, hemos decidido unir nuestras vidas para siempre. Estamos emocionados de comenzar este nuevo capítulo y de celebrarlo con ustedes, nuestros seres queridos.</p>
+                    <img src="https://via.placeholder.com/400x250?text=Foto+El+Gran+Paso" alt="Foto de la propuesta o compromiso" class="story-image">
+                </div>
+            </div>
+        </section>
+
+        <div class="decorative-separator"></div>
+
+        <section id="countdown">
+            <div class="container">
+                <h2>¡Faltan Sólo!</h2>
+                <div class="countdown-timer">
+                    <div class="countdown-item">
+                        <span id="days">00</span>
+                        <span>Días</span>
+                    </div>
+                    <div class="countdown-item">
+                        <span id="hours">00</span>
+                        <span>Horas</span>
+                    </div>
+                    <div class="countdown-item">
+                        <span id="minutes">00</span>
+                        <span>Minutos</span>
+                    </div>
+                    <div class="countdown-item">
+                        <span id="seconds">00</span>
+                        <span>Segundos</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="decorative-separator"></div>
+
+        <section id="detalles" class="visible">
+            <div class="container">
+                <h2>Detalles del Evento</h2>
+                <div class="detail-item">
+                    <i class="fas fa-calendar-alt"></i>
+                    <h3>Fecha y Hora</h3>
+                    <p>Sábado, 04 de enero del 2026</p>
+                    <p>Ceremonia y Recepción: 7 PM a 12 AM</p>
+                </div>
+                <div class="detail-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <h3>Ubicación</h3>
+                    <p><strong>Finca Montebello</strong></p>
+                    <p>Cd Valles-Antiguo Morelos 3109, Lomas del Real,</p>
+                    <p>79028 Cdad. Valles, S.L.P., México</p>
+                    <iframe
+                        class="location-map"
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3694.9197788989586!2d-98.99519834644245!3d22.023602944924832!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d780190c63f2a1%3A0x8d08849a9a702b7e!2sFinca%20Montebello!5e0!3m2!1ses-419!2smx!4v1705488155845!5m2!1ses-419!2smx"
+                        width="600"
+                        height="450"
+                        style="border:0;"
+                        allowfullscreen=""
+                        loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade"
+                    ></iframe>
+                    <small>Haga clic en el mapa para ver la ubicación exacta en Google Maps</small>
+                </div>
+            </div>
+        </section>
+
+        <div class="decorative-separator"></div>
+
+        <section id="rsvp">
+            <div class="container">
+                <h2>Confirmación de Asistencia</h2>
+                <p>¡Su presencia es el mejor regalo! Por favor, ayúdennos a planificar nuestro gran día confirmando su asistencia.</p>
+                <p>Agradecemos su pronta respuesta.</p>
+                <a href="https://wa.me/524811565106?text=Quiero%20confirmar%20mi%20asistencia%20a%20la%20boda%20de%20Alexandra%20%26%20Emilio%20el%2004%20de%20enero%20del%202026" target="_blank" class="rsvp-button">
+                    Confirmar Asistencia vía WhatsApp
+                </a>
+                <p style="margin-top: 20px; font-size: 0.9em;">Fecha límite para confirmar: 7 de septiembre de 2025</p>
+            </div>
+        </section>
+
+    </main>
 
     <footer>
-        <p>&copy; 2026 Emilio & Alexandra. Todos los derechos reservados.</p>
+        <p>© 2026 Alexandra & Emilio. Todos los derechos reservados.</p>
     </footer>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            // Smooth Scroll
+            const splashScreen = document.getElementById('splash-screen');
+            const openButton = document.getElementById('open-invitation-button');
+            const mainContent = document.getElementById('main-content');
+            
+            // Oculta el contenido principal al inicio
+            mainContent.style.display = 'none';
+
+            // Evento para el botón "Abrir Invitación"
+            openButton.addEventListener('click', () => {
+                splashScreen.classList.add('hidden'); // Inicia la transición para ocultar
+                setTimeout(() => {
+                    splashScreen.style.display = 'none'; // Oculta completamente después de la transición
+                    mainContent.style.display = 'block'; // Muestra el contenido principal
+                    // Haz que la primera sección (hero) se anime al cargar el contenido principal
+                    document.getElementById('hero').classList.add('visible');
+                    // Desplázate al inicio del contenido principal
+                    window.scrollTo(0, 0);
+                }, 1000); // Coincide con la duración de la transición de opacidad de splash-screen
+            });
+
+            // Smooth Scroll para los enlaces internos
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
                 anchor.addEventListener('click', function (e) {
                     e.preventDefault();
-                    document.querySelector(this.getAttribute('href')).scrollIntoView({
-                        behavior: 'smooth'
-                    });
+                    if (mainContent.style.display === 'block') { // Solo si el contenido principal está visible
+                        document.querySelector(this.getAttribute('href')).scrollIntoView({
+                            behavior: 'smooth'
+                        });
+                    }
                 });
             });
 
-            // Fade-in / Slide-up on scroll
-            const sections = document.querySelectorAll('section');
+            // Fade-in / Slide-up on scroll para las secciones
+            const sections = document.querySelectorAll('main section'); // Solo secciones dentro de 'main'
 
             const observerOptions = {
                 root: null,
                 rootMargin: '0px',
-                threshold: 0.1
+                threshold: 0.1 // Cuando el 10% de la sección es visible
             };
 
             const sectionObserver = new IntersectionObserver((entries, observer) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
                         entry.target.classList.add('visible');
-                        observer.unobserve(entry.target); // Stop observing once visible
+                        observer.unobserve(entry.target); // Dejar de observar una vez que sea visible
                     }
                 });
             }, observerOptions);
 
             sections.forEach(section => {
-                if (section.id !== 'hero') { // Hero section is visible by default
+                if (section.id !== 'hero') { // La sección hero ya es visible al abrir la invitación
                     sectionObserver.observe(section);
                 }
             });
 
-            // Parallax Effect (simple version)
+            // Parallax Effect (para los separadores decorativos y algunas secciones)
             window.addEventListener('scroll', () => {
                 const scrolled = window.pageYOffset;
-                document.getElementById('historia').style.backgroundPositionY = -(scrolled * 0.15) + 'px';
-                document.getElementById('rsvp').style.backgroundPositionY = -(scrolled * 0.1) + 'px';
+                document.querySelectorAll('.decorative-separator').forEach(separator => {
+                    separator.style.backgroundPositionY = -(scrolled * 0.1) + 'px';
+                });
+                // Si quieres un parallax suave en otras secciones también:
+                // document.getElementById('historia').style.backgroundPositionY = -(scrolled * 0.05) + 'px';
+                // document.getElementById('rsvp').style.backgroundPositionY = -(scrolled * 0.08) + 'px';
             });
+
+            // Countdown Timer
+            // La fecha y hora de la boda: 04 de enero del 2026, 7 PM
+            const weddingDate = new Date('January 04, 2026 19:00:00').getTime(); 
+
+            const x = setInterval(function() {
+                const now = new Date().getTime();
+                const distance = weddingDate - now;
+
+                // Cálculos para días, horas, minutos, segundos
+                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                // Actualizar los elementos en el HTML
+                document.getElementById('days').innerText = days < 10 ? '0' + days : days;
+                document.getElementById('hours').innerText = hours < 10 ? '0' + hours : hours;
+                document.getElementById('minutes').innerText = minutes < 10 ? '0' + minutes : minutes;
+                document.getElementById('seconds').innerText = seconds < 10 ? '0' + seconds : seconds;
+
+                // Cuando la cuenta regresiva termina
+                if (distance < 0) {
+                    clearInterval(x);
+                    document.getElementById('days').innerText = '00';
+                    document.getElementById('hours').innerText = '00';
+                    document.getElementById('minutes').innerText = '00';
+                    document.getElementById('seconds').innerText = '00';
+                    // Opcional: Mostrar un mensaje como "¡Ya es el gran día!"
+                    // document.getElementById('countdown-message').innerText = "¡El Gran Día Ha Llegado!";
+                }
+            }, 1000);
         });
     </script>
 </body>
