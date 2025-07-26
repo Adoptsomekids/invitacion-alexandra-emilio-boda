@@ -12,8 +12,8 @@
 
     <style>
         :root {
-            --primary-color: #f7e6e6; /* Rosa muy claro */
-            --secondary-color: #d4af37; /* Dorado */
+            --primary-color: #f0f8ff; /* Azul cielo muy claro - para fondos alternos y bordes */
+            --secondary-color: #191970; /* Azul marino - para títulos, nombres y botones */
             --text-color: #333;
             --light-text-color: #555;
             --white: #fff;
@@ -82,15 +82,14 @@
             left: 0;
             width: 100%;
             height: 100%;
-            /* Usa la nueva variable para el fondo de splash screen */
             background: rgba(255, 255, 255, 0.95) var(--splash-screen-background) no-repeat center center/cover;
             display: flex;
             justify-content: center;
             align-items: center;
-            z-index: 9999;
+            z-index: 9999; /* Asegura que cubra todo */
             transition: opacity 1s ease-out, visibility 1s ease-out;
             flex-direction: column;
-            overflow: hidden; /* Evita desbordamientos durante las animaciones */
+            overflow: hidden;
         }
 
         #splash-screen.hidden {
@@ -105,9 +104,9 @@
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
             text-align: center;
             max-width: 90%;
-            transform: scale(0.8); /* Inicia más pequeño */
+            transform: scale(0.8);
             opacity: 0;
-            animation: popIn 0.8s forwards cubic-bezier(0.68, -0.55, 0.27, 1.55); /* Animación más elástica */
+            animation: popIn 0.8s forwards cubic-bezier(0.68, -0.55, 0.27, 1.55);
         }
 
         @keyframes popIn {
@@ -125,12 +124,12 @@
         .splash-content .names-signature {
             font-family: 'Parisienne', cursive;
             font-size: 4em;
-            color: var(--secondary-color);
+            color: var(--secondary-color); /* Azul marino para los nombres */
             margin-bottom: 30px;
             line-height: 1;
         }
          .splash-content .names-signature span {
-            display: block; /* Para que cada nombre esté en su propia línea */
+            display: block;
             text-align: center;
         }
 
@@ -150,7 +149,7 @@
         }
 
         .open-button:hover {
-            background-color: #c09f2c;
+            background-color: #000080; /* Azul marino más oscuro */
             transform: translateY(-3px);
         }
 
@@ -160,7 +159,6 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            /* Usa la nueva variable para el fondo de la sección hero */
             background: var(--hero-couple-photo) no-repeat center center/cover;
             color: var(--white);
             text-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
@@ -205,26 +203,26 @@
             font-family: 'Playfair Display', serif;
             font-size: 1.5em;
             font-weight: 400;
+            color: var(--secondary-color); /* Azul marino para la fecha y ubicación */
         }
 
-        /* Separadores Decorativos (para simular el estilo de las imágenes) */
+        /* Separadores Decorativos */
         .decorative-separator {
             width: 100%;
-            height: 100px; /* Altura ajustada para el floral pattern */
-            /* Usa la nueva variable para el fondo floral general */
+            height: 100px;
             background: var(--floral-pattern-background) no-repeat center center/cover;
-            background-attachment: fixed; /* Efecto parallax */
+            background-attachment: fixed;
             position: relative;
             z-index: 0;
-            opacity: 0.7; /* Opacidad ligeramente reducida */
-            margin-top: 60px; /* Espacio superior */
-            margin-bottom: 60px; /* Espacio inferior */
+            opacity: 0.7;
+            margin-top: 60px;
+            margin-bottom: 60px;
         }
 
 
         /* Historia de Amor */
         #historia {
-            background: var(--primary-color);
+            background: var(--primary-color); /* Azul cielo muy claro */
             padding-bottom: 80px;
         }
 
@@ -235,43 +233,46 @@
         }
 
         .story-item {
-            margin-bottom: 60px; /* Espacio aumentado entre items de historia */
+            margin-bottom: 60px;
             padding: 20px;
-            border-left: 5px solid var(--secondary-color);
+            border-left: 5px solid var(--primary-color); /* Azul cielo para el borde */
             text-align: left;
             position: relative;
         }
         .story-item::before {
-            content: '❤'; /* Pequeño corazón como bullet point */
+            content: '❤';
             position: absolute;
-            left: -30px; /* Ajusta la posición del corazón */
+            left: -30px;
             top: 15px;
             font-size: 1.5em;
-            color: var(--secondary-color);
+            color: var(--secondary-color); /* Azul marino para el corazón */
         }
 
         .story-item h3 {
-            color: var(--secondary-color);
+            color: var(--secondary-color); /* Azul marino para el título */
             margin-bottom: 10px;
         }
 
         .story-item p {
             font-size: 1.1em;
-            margin-bottom: 20px; /* Espacio después del párrafo antes de la imagen */
+            margin-bottom: 20px;
         }
 
         .story-item .story-image {
             width: 100%;
-            max-width: 400px; /* Tamaño máximo para las imágenes de historia */
+            max-width: 480px; /* Tamaño máximo para las imágenes de historia aumentado */
             height: auto;
             border-radius: 10px;
-            margin: 20px auto; /* Centra la imagen y da espacio */
+            margin: 20px auto;
             display: block;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease;
+            transition: transform 0.6s ease, opacity 0.6s ease; /* Transición más suave para la animación */
+            opacity: 0;
+            transform: translateY(20px); /* Inicia ligeramente hacia abajo */
         }
-        .story-item .story-image:hover {
-            transform: scale(1.02);
+        .story-item .story-image.visible {
+            opacity: 1;
+            transform: translateY(0) scale(1.02); /* Aparece y se agranda ligeramente */
         }
 
 
@@ -289,7 +290,7 @@
             justify-content: center;
             gap: 30px;
             margin-top: 40px;
-            flex-wrap: wrap; /* Para responsividad */
+            flex-wrap: wrap;
         }
 
         .countdown-item {
@@ -297,7 +298,7 @@
             flex-direction: column;
             align-items: center;
             font-family: 'Playfair Display', serif;
-            font-size: 3em;
+            font-size: 3em; /* Tamaño base */
             color: var(--text-color);
         }
 
@@ -310,7 +311,7 @@
 
         /* Detalles del Evento */
         #detalles {
-            background: var(--primary-color); /* Fondo alterno para contraste */
+            background: var(--primary-color);
             padding-bottom: 80px;
         }
 
@@ -329,7 +330,7 @@
 
         .detail-item i {
             font-size: 3em;
-            color: var(--secondary-color);
+            color: var(--secondary-color); /* Azul marino para el icono */
             margin-bottom: 15px;
         }
 
@@ -346,14 +347,71 @@
         .location-map {
             margin-top: 30px;
             width: 100%;
-            max-width: 600px; /* Limita el ancho del mapa */
+            max-width: 600px;
             height: 400px;
             border: 0;
             border-radius: 8px;
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            display: block; /* Asegura que el mapa se centre con margin: auto */
+            display: block;
             margin-left: auto;
             margin-right: auto;
+        }
+
+        /* Código de Vestimenta */
+        #vestimenta {
+            background: var(--primary-color);
+            padding-bottom: 80px;
+        }
+
+        #vestimenta .container {
+             background: rgba(255, 255, 255, 0.95);
+             padding: 50px;
+             border-radius: 15px;
+        }
+
+        #vestimenta h2 {
+            color: var(--secondary-color); /* Azul marino para el título */
+            margin-bottom: 30px;
+        }
+
+        .vestimenta-info {
+            display: flex;
+            justify-content: space-around;
+            align-items: flex-start;
+            flex-wrap: wrap;
+        }
+
+        .vestimenta-detalle {
+            text-align: center;
+            margin-bottom: 20px;
+            flex: 1;
+            min-width: 200px;
+            max-width: 300px;
+            padding: 15px;
+        }
+
+        .vestimenta-detalle img {
+            max-width: 150px; /* Ajustado para los iconos de vestimenta */
+            height: auto;
+            opacity: 0.8;
+            margin-bottom: 10px;
+        }
+
+        .vestimenta-detalle h4 {
+            color: var(--light-text-color);
+            font-size: 1.2em;
+            margin-bottom: 5px;
+        }
+
+        .vestimenta-detalle p {
+            font-size: 0.9em;
+            line-height: 1.5;
+            margin: 0;
+        }
+        .vestimenta-detalle h3 { /* Para el título "Formal" */
+           color: var(--secondary-color);
+           font-size: 1.6em;
+           margin-top: 20px;
         }
 
         /* Confirmación de Asistencia */
@@ -370,7 +428,7 @@
 
         .rsvp-button {
             display: inline-block;
-            background-color: var(--secondary-color);
+            background-color: var(--secondary-color); /* Azul marino para el botón */
             color: var(--white);
             padding: 15px 30px;
             border-radius: 5px;
@@ -383,8 +441,26 @@
         }
 
         .rsvp-button:hover {
-            background-color: #c09f2c; /* Dorado más oscuro */
+            background-color: #000080; /* Azul marino más oscuro */
             transform: translateY(-3px);
+        }
+
+        .rsvp-photo-container {
+            margin-top: 30px;
+            text-align: center;
+            background: var(--primary-color);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+
+        .rsvp-photo-container img {
+            max-width: 300px;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            display: block;
+            margin: 15px auto 5px auto;
         }
 
         /* Footer */
@@ -412,26 +488,38 @@
             h1 { font-size: 2.8em; }
             h2 { font-size: 2em; }
             #hero h1 { font-size: 3.5em; }
-            #hero p { font-size: 1.4em; }
+            #hero p { font-size: 1.4em; color: var(--secondary-color);}
+            #hero .date-location { font-size: 1.3em; }
             section { padding: 60px 15px; }
             .container { padding: 25px; }
             .rsvp-button { padding: 12px 25px; font-size: 1em; }
-            .story-item, .detail-item { text-align: center; border-left: none; }
-            .story-item::before { left: 50%; transform: translateX(-50%); top: -10px; } /* Centra el corazón en móviles */
+            .story-item, .detail-item, .vestimenta-detalle { text-align: center; border-left: none; }
+            .story-item::before { left: 50%; transform: translateX(-50%); top: -10px; }
             .countdown-item { font-size: 2.5em; gap: 15px; }
             .story-item .story-image { max-width: 90%; }
-            .decorative-separator { margin-top: 40px; margin-bottom: 40px; } /* Ajuste para móviles */
+            .decorative-separator { margin-top: 40px; margin-bottom: 40px; }
+            .vestimenta-info { flex-direction: column; align-items: center; }
+            .vestimenta-detalle { margin: 20px 0; }
         }
 
         @media (max-width: 480px) {
             h1 { font-size: 2.2em; }
             h2 { font-size: 1.6em; }
             #hero h1 { font-size: 2.8em; }
-            #hero p { font-size: 1.2em; }
+            #hero p { font-size: 1.2em; color: var(--secondary-color);}
+            #hero .date-location { font-size: 1.2em; }
             section { padding: 40px 10px; }
             .container { padding: 20px; }
             .splash-content .names-signature { font-size: 3em; }
-            .countdown-item { font-size: 2em; }
+            .countdown-item { font-size: 1.8em; }
+            .countdown-item span { font-size: 0.5em; }
+        }
+
+        /* Ajustes para datos del calendario/countdown en pantallas pequeñas */
+        @media (max-width: 600px) {
+            .countdown-item { font-size: 2.2em; }
+            .countdown-item span { font-size: 0.6em; }
+            .detail-item p { font-size: 1.05em; }
         }
     </style>
 </head>
@@ -454,8 +542,8 @@
         <section id="hero" class="visible">
             <div class="container">
                 <h1>Alexandra & Emilio</h1>
-                <p>¡Nos Casamos!</p>
-                <p class="date-location">04 de enero del 2026</p>
+                <p style="color: var(--secondary-color);">¡Nos Casamos!</p>
+                <p class="date-location">Domingo, 04 de enero del 2026</p>
                 <p class="date-location">📍 Finca Montebello</p>
             </div>
         </section>
@@ -520,8 +608,9 @@
                 <div class="detail-item">
                     <i class="fas fa-calendar-alt"></i>
                     <h3>Fecha y Hora</h3>
-                    <p>Sábado, 04 de enero del 2026</p>
-                    <p>Ceremonia y Recepción: 7 PM a 12 AM</p>
+                    <p>Domingo, 04 de enero del 2026</p>
+                    <p>Ceremonia: 5 PM</p>
+                    <p>Recepción: 7 PM</p>
                 </div>
                 <div class="detail-item">
                     <i class="fas fa-map-marker-alt"></i>
@@ -531,12 +620,34 @@
                     <p>79028 Cdad. Valles, S.L.P., México</p>
                     <iframe
                         class="location-map"
-                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3688.1697241006096!2d-98.99519834644245!3d22.023602944924832!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d681283c7b3991%3A0x6a0c0b3b7e7b8a7!2sFinca%20Montebello!5e0!3m2!1ses-419!2smx!4v1700000000000!5m2!1ses-419!2smx"
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3706.448879434879!2d-98.99519834644245!3d22.023602944924832!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d79231ff48baad%3A0x7c7941d08f9139a0!2sFinca%20Montebello!5e0!3m2!1ses-419!2smx!4v1703188928109!5m2!1ses-419!2smx"
+                        width="600"
+                        height="450"
+                        style="border:0;"
                         allowfullscreen=""
                         loading="lazy"
-                        referrerpolicy="no-referrer-when-downgrade"
-                    ></iframe>
+                        referrerpolicy="no-referrer-when-downgrade"></iframe>
                     <small>Haga clic en el mapa para ver la ubicación exacta en Google Maps</small>
+                </div>
+            </div>
+        </section>
+
+        <div class="decorative-separator"></div>
+
+        <section id="vestimenta">
+            <div class="container">
+                <h2>Código de Vestimenta</h2>
+                <div class="vestimenta-info">
+                    <div class="vestimenta-detalle">
+                        <img src="images/formal-hombre.png" alt="Icono de vestimenta formal para hombres">
+                        <h4>Hombres</h4>
+                        <h3>Formal</h3>
+                    </div>
+                    <div class="vestimenta-detalle">
+                        <img src="images/formal-mujer.png" alt="Icono de vestimenta formal para mujeres">
+                        <h4>Mujeres</h4>
+                        <h3>Formal</h3>
+                    </div>
                 </div>
             </div>
         </section>
@@ -552,6 +663,12 @@
                     Confirmar Asistencia vía WhatsApp
                 </a>
                 <p style="margin-top: 20px; font-size: 0.9em;">Fecha límite para confirmar: 7 de septiembre de 2025</p>
+                <div class="rsvp-photo-container">
+                    <h3>¡Comparte tus fotos de la boda!</h3>
+                    <p>Puedes compartir las fotos que tomes de la boda en nuestra carpeta de Google Drive. ¡Nos encantaría ver tus momentos favoritos!</p>
+                    <img src="images/rsvp-photo.jpg" alt="Espacio para foto de pareja de invitados" style="max-height: 200px; object-fit: cover;">
+                    <p style="font-size: 0.8em; margin-top: 5px;">(Nombre de archivo sugerido para tu foto: `rsvp-photo.jpg`)</p>
+                </div>
             </div>
         </section>
 
@@ -566,6 +683,7 @@
             const splashScreen = document.getElementById('splash-screen');
             const openButton = document.getElementById('open-invitation-button');
             const mainContent = document.getElementById('main-content');
+            const storyImages = document.querySelectorAll('#historia .story-image');
 
             // Oculta el contenido principal al inicio
             mainContent.style.display = 'none';
@@ -576,14 +694,14 @@
                 setTimeout(() => {
                     splashScreen.style.display = 'none'; // Oculta completamente después de la transición
                     mainContent.style.display = 'block'; // Muestra el contenido principal
-                    // Haz que la primera sección (hero) se anime al cargar el contenido principal
+                    // Haz que la primera sección (hero) sea visible al cargar el contenido principal
                     document.getElementById('hero').classList.add('visible');
-                    // Desplázate al inicio del contenido principal
+                    // Desplázate al inicio del contenido principal para evitar el salto
                     window.scrollTo(0, 0);
                 }, 1000); // Coincide con la duración de la transición de opacidad de splash-screen
             });
 
-            // Smooth Scroll para los enlaces internos
+            // Smooth Scroll para los enlaces internos (si los hubiera)
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
                 anchor.addEventListener('click', function (e) {
                     e.preventDefault();
@@ -595,16 +713,14 @@
                 });
             });
 
-            // Fade-in / Slide-up on scroll para las secciones
-            const sections = document.querySelectorAll('main section'); // Solo secciones dentro de 'main'
-
+            // Función para añadir clase 'visible' a elementos al hacer scroll (para animaciones)
             const observerOptions = {
-                root: null,
+                root: null, // viewport
                 rootMargin: '0px',
-                threshold: 0.1 // Cuando el 10% de la sección es visible
+                threshold: 0.1 // Cuando el 10% del elemento es visible
             };
 
-            const sectionObserver = new IntersectionObserver((entries, observer) => {
+            const elementObserver = new IntersectionObserver((entries, observer) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
                         entry.target.classList.add('visible');
@@ -613,52 +729,45 @@
                 });
             }, observerOptions);
 
-            sections.forEach(section => {
-                if (section.id !== 'hero') { // La sección hero ya es visible al abrir la invitación
-                    sectionObserver.observe(section);
-                }
+            // Observar todas las secciones (excepto hero, que ya es visible)
+            document.querySelectorAll('main section:not(#hero)').forEach(section => {
+                elementObserver.observe(section);
             });
 
-            // Parallax Effect (para los separadores decorativos y algunas secciones)
+            // Observar las imágenes de historia para la animación específica
+            storyImages.forEach(img => {
+                elementObserver.observe(img);
+            });
+
+
+            // Parallax Effect (para los separadores decorativos)
             window.addEventListener('scroll', () => {
                 const scrolled = window.pageYOffset;
                 document.querySelectorAll('.decorative-separator').forEach(separator => {
                     separator.style.backgroundPositionY = -(scrolled * 0.1) + 'px';
                 });
-                // Si quieres un parallax suave en otras secciones también:
-                // document.getElementById('historia').style.backgroundPositionY = -(scrolled * 0.05) + 'px';
-                // document.getElementById('rsvp').style.backgroundPositionY = -(scrolled * 0.08) + 'px';
             });
 
             // Countdown Timer
-            // La fecha y hora de la boda: 04 de enero del 2026, 7 PM
-            const weddingDate = new Date('January 04, 2026 19:00:00').getTime();
+            const weddingDate = new Date('January 04, 2026 17:00:00').getTime(); // 04 de enero de 2026, 5 PM
 
             const x = setInterval(function() {
                 const now = new Date().getTime();
                 const distance = weddingDate - now;
 
-                // Cálculos para días, horas, minutos, segundos
                 const days = Math.floor(distance / (1000 * 60 * 60 * 24));
                 const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
                 const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
                 const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-                // Actualizar los elementos en el HTML
                 document.getElementById('days').innerText = days < 10 ? '0' + days : days;
                 document.getElementById('hours').innerText = hours < 10 ? '0' + hours : hours;
                 document.getElementById('minutes').innerText = minutes < 10 ? '0' + minutes : minutes;
                 document.getElementById('seconds').innerText = seconds < 10 ? '0' + seconds : seconds;
 
-                // Cuando la cuenta regresiva termina
                 if (distance < 0) {
                     clearInterval(x);
-                    document.getElementById('days').innerText = '00';
-                    document.getElementById('hours').innerText = '00';
-                    document.getElementById('minutes').innerText = '00';
-                    document.getElementById('seconds').innerText = '00';
-                    // Opcional: Mostrar un mensaje como "¡Ya es el gran día!"
-                    // document.getElementById('countdown-message').innerText = "¡El Gran Día Ha Llegado!";
+                    document.getElementById('countdown').innerHTML = "<div class='container'><h2>¡Ya nos casamos!</h2><p>Gracias por ser parte de nuestro día especial.</p></div>";
                 }
             }, 1000);
         });
