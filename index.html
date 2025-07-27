@@ -18,9 +18,19 @@
             --light-text-color: #555;
             --white: #fff;
             /* Rutas relativas a la carpeta 'images' */
-            --floral-pattern-background: url('images/floral-pattern.jpg'); /* Fondo para separadores */
             --splash-screen-background: url('images/splash-background.jpg'); /* Fondo para la pantalla de bienvenida */
             --hero-couple-photo: url('images/hero-background.jpg'); /* Foto de fondo de la sección principal */
+
+            /* Imágenes decorativas de ESQUINA - se mantienen */
+            --deco-corner-top-left: url('images/deco-corner-top-left.jpg'); /* Flores para esquina superior izquierda */
+            /* La imagen image_cd958a.jpg (deco-corner-bottom) se usa rotada para simular el top-left en diferentes esquinas */
+
+            /* NUEVAS imágenes para los separadores */
+            --divider-roses-1: url('images/divider-roses-1.jpg');
+            --divider-roses-2: url('images/divider-roses-2.jpg');
+            --divider-roses-3: url('images/divider-roses-3.jpg');
+            --divider-roses-4: url('images/divider-roses-4.jpg');
+            --divider-roses-5: url('images/divider-roses-5.jpg');
         }
 
         /* Asegúrate de que las imágenes mencionadas existan en la carpeta 'images' de tu repositorio */
@@ -73,6 +83,8 @@
             padding: 40px;
             border-radius: 10px;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            position: relative; /* Para posicionar decoraciones internas */
+            z-index: 1; /* Asegura que el contenido esté sobre las decoraciones */
         }
 
         /* Splash Screen */
@@ -206,25 +218,53 @@
             color: var(--secondary-color); /* Azul marino para la fecha y ubicación */
         }
 
-        /* Separadores Decorativos */
+        /* Separadores Decorativos con las NUEVAS IMÁGENES */
         .decorative-separator {
             width: 100%;
-            height: 100px;
-            background: var(--floral-pattern-background) no-repeat center center/cover;
-            background-attachment: fixed;
+            height: 150px; /* Ajusta la altura según tus imágenes */
+            background-repeat: no-repeat;
+            background-position: center center;
+            background-size: cover; /* o 'contain' si prefieres que la imagen completa se vea sin recortar */
             position: relative;
             z-index: 0;
-            opacity: 0.7;
+            opacity: 0; /* Inicia invisible para la animación */
+            transform: translateY(50px); /* Inicia ligeramente abajo para la animación */
+            transition: opacity 1s ease-out, transform 1s ease-out; /* Animación individual */
             margin-top: 60px;
             margin-bottom: 60px;
         }
+
+        .decorative-separator.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Asignar diferentes imágenes a cada separador */
+        .decorative-separator.sep-1 { background-image: var(--divider-roses-1); }
+        .decorative-separator.sep-2 { background-image: var(--divider-roses-2); }
+        .decorative-separator.sep-3 { background-image: var(--divider-roses-3); }
+        .decorative-separator.sep-4 { background-image: var(--divider-roses-4); }
+        .decorative-separator.sep-5 { background-image: var(--divider-roses-5); }
 
 
         /* Historia de Amor */
         #historia {
             background: var(--primary-color); /* Azul cielo muy claro */
             padding-bottom: 80px;
+            position: relative;
         }
+        #historia .container::before { /* Esquina superior izquierda */
+            content: '';
+            position: absolute;
+            top: -50px;
+            left: -50px;
+            width: 200px;
+            height: 200px;
+            background: var(--deco-corner-top-left) no-repeat center center/contain;
+            z-index: 0;
+            opacity: 0.8;
+        }
+
 
         #historia .container {
             background: rgba(255, 255, 255, 0.95);
@@ -266,13 +306,13 @@
             margin: 20px auto;
             display: block;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            transition: transform 0.6s ease, opacity 0.6s ease; /* Transición más suave para la animación */
+            transition: transform 0.8s ease-out, opacity 0.8s ease-out; /* Transición más suave para la animación */
             opacity: 0;
-            transform: translateY(20px); /* Inicia ligeramente hacia abajo */
+            transform: translateY(30px) scale(0.95); /* Inicia ligeramente hacia abajo y más pequeño */
         }
         .story-item .story-image.visible {
             opacity: 1;
-            transform: translateY(0) scale(1.02); /* Aparece y se agranda ligeramente */
+            transform: translateY(0) scale(1); /* Aparece y vuelve al tamaño normal */
         }
 
 
@@ -280,10 +320,15 @@
         #countdown {
             background: var(--white);
             padding: 80px 20px;
+            position: relative;
         }
         #countdown .container {
             background: rgba(255, 255, 255, 0.95);
+            position: relative;
+            z-index: 1; /* Asegura que el contenido esté sobre las decoraciones */
         }
+        /* No hay decoraciones específicas para #countdown aparte del separador de abajo */
+
 
         .countdown-timer {
             display: flex;
@@ -313,12 +358,27 @@
         #detalles {
             background: var(--primary-color);
             padding-bottom: 80px;
+            position: relative;
+        }
+        #detalles .container::after { /* Esquina inferior derecha */
+            content: '';
+            position: absolute;
+            bottom: -50px;
+            right: -50px;
+            width: 200px;
+            height: 200px;
+            background: var(--deco-corner-top-left) no-repeat center center/contain;
+            transform: rotate(180deg); /* Para que apunte en la otra dirección */
+            z-index: 0;
+            opacity: 0.8;
         }
 
         #detalles .container {
              background: rgba(255, 255, 255, 0.95);
              padding: 50px;
              border-radius: 15px;
+             position: relative;
+             z-index: 1;
         }
 
         .detail-item {
@@ -361,6 +421,19 @@
         #vestimenta {
             background: var(--primary-color);
             padding-bottom: 80px;
+            position: relative;
+        }
+        #vestimenta .container::before { /* Esquina superior derecha */
+            content: '';
+            position: absolute;
+            top: -50px;
+            right: -50px;
+            width: 200px;
+            height: 200px;
+            background: var(--deco-corner-top-left) no-repeat center center/contain;
+            transform: rotate(90deg); /* Para que apunte hacia la derecha */
+            z-index: 0;
+            opacity: 0.8;
         }
 
         #vestimenta .container {
@@ -418,7 +491,21 @@
         #rsvp {
             background: var(--primary-color);
             padding-bottom: 80px;
+            position: relative;
         }
+        #rsvp .container::after { /* Esquina inferior izquierda */
+            content: '';
+            position: absolute;
+            bottom: -50px;
+            left: -50px;
+            width: 200px;
+            height: 200px;
+            background: var(--deco-corner-top-left) no-repeat center center/contain;
+            transform: rotate(-90deg); /* Para que apunte hacia la izquierda */
+            z-index: 0;
+            opacity: 0.8;
+        }
+
 
         #rsvp .container {
              background: rgba(255, 255, 255, 0.95);
@@ -470,7 +557,11 @@
             text-align: center;
             padding: 20px;
             font-size: 0.9em;
+            position: relative;
+            z-index: 1; /* Asegura que el texto esté sobre cualquier fondo */
         }
+        /* No hay una decoración específica para el footer en este nuevo enfoque */
+
 
         /* Animaciones */
         @keyframes fadeIn {
@@ -497,9 +588,19 @@
             .story-item::before { left: 50%; transform: translateX(-50%); top: -10px; }
             .countdown-item { font-size: 2.5em; gap: 15px; }
             .story-item .story-image { max-width: 90%; }
-            .decorative-separator { margin-top: 40px; margin-bottom: 40px; }
+            .decorative-separator { margin-top: 40px; margin-bottom: 40px; height: 100px; /* Ajuste para móviles */ }
             .vestimenta-info { flex-direction: column; align-items: center; }
             .vestimenta-detalle { margin: 20px 0; }
+            /* Ajustes para decoraciones en móvil */
+            #historia .container::before, #historia .container::after,
+            #detalles .container::after, #vestimenta .container::before, #rsvp .container::after {
+                width: 100px;
+                height: 100px;
+                top: -30px;
+                left: -30px;
+                right: -30px;
+                bottom: -30px;
+            }
         }
 
         @media (max-width: 480px) {
@@ -513,6 +614,7 @@
             .splash-content .names-signature { font-size: 3em; }
             .countdown-item { font-size: 1.8em; }
             .countdown-item span { font-size: 0.5em; }
+            .decorative-separator { height: 80px; } /* Más pequeño en móviles */
         }
 
         /* Ajustes para datos del calendario/countdown en pantallas pequeñas */
@@ -548,7 +650,7 @@
             </div>
         </section>
 
-        <div class="decorative-separator"></div>
+        <div class="decorative-separator sep-1"></div>
 
         <section id="historia">
             <div class="container">
@@ -574,7 +676,7 @@
             </div>
         </section>
 
-        <div class="decorative-separator"></div>
+        <div class="decorative-separator sep-2"></div>
 
         <section id="countdown">
             <div class="container">
@@ -600,7 +702,7 @@
             </div>
         </section>
 
-        <div class="decorative-separator"></div>
+        <div class="decorative-separator sep-3"></div>
 
         <section id="detalles">
             <div class="container">
@@ -632,7 +734,7 @@
             </div>
         </section>
 
-        <div class="decorative-separator"></div>
+        <div class="decorative-separator sep-4"></div>
 
         <section id="vestimenta">
             <div class="container">
@@ -652,7 +754,7 @@
             </div>
         </section>
 
-        <div class="decorative-separator"></div>
+        <div class="decorative-separator sep-5"></div>
 
         <section id="rsvp">
             <div class="container">
@@ -662,12 +764,11 @@
                 <a href="https://wa.me/524811565106?text=Quiero%20confirmar%20mi%20asistencia%20a%20la%20boda%20de%20Alexandra%20%26%20Emilio%20el%2004%20de%20enero%20del%202026" target="_blank" class="rsvp-button">
                     Confirmar Asistencia vía WhatsApp
                 </a>
-                <p style="margin-top: 20px; font-size: 0.9em;">Fecha límite para confirmar: 7 de septiembre de 2025</p>
+                <p style="margin-top: 20px; font-size: 0.9em;">Fecha límite para confirmar: 7 de Noviembre de 2025</p>
                 <div class="rsvp-photo-container">
                     <h3>¡Comparte tus fotos de la boda!</h3>
                     <p>Puedes compartir las fotos que tomes de la boda en nuestra carpeta de Google Drive. ¡Nos encantaría ver tus momentos favoritos!</p>
                     <img src="images/rsvp-photo.jpg" alt="Espacio para foto de pareja de invitados" style="max-height: 200px; object-fit: cover;">
-                    <p style="font-size: 0.8em; margin-top: 5px;">(Nombre de archivo sugerido para tu foto: `rsvp-photo.jpg`)</p>
                 </div>
             </div>
         </section>
@@ -684,6 +785,7 @@
             const openButton = document.getElementById('open-invitation-button');
             const mainContent = document.getElementById('main-content');
             const storyImages = document.querySelectorAll('#historia .story-image');
+            const decorativeSeparators = document.querySelectorAll('.decorative-separator'); // Seleccionar todos los separadores
 
             // Oculta el contenido principal al inicio
             mainContent.style.display = 'none';
@@ -739,13 +841,9 @@
                 elementObserver.observe(img);
             });
 
-
-            // Parallax Effect (para los separadores decorativos)
-            window.addEventListener('scroll', () => {
-                const scrolled = window.pageYOffset;
-                document.querySelectorAll('.decorative-separator').forEach(separator => {
-                    separator.style.backgroundPositionY = -(scrolled * 0.1) + 'px';
-                });
+            // Observar los separadores decorativos para su animación individual
+            decorativeSeparators.forEach(separator => {
+                elementObserver.observe(separator);
             });
 
             // Countdown Timer
