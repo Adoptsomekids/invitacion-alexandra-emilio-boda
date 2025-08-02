@@ -23,7 +23,6 @@
 
             /* Imágenes decorativas de ESQUINA - se mantienen */
             --deco-corner-top-left: url('images/deco-corner-top-left.jpg'); /* Flores para esquina superior izquierda */
-            /* La imagen image_cd958a.jpg (deco-corner-bottom) se usa rotada para simular el top-left en diferentes esquinas */
 
             /* NUEVAS imágenes para los separadores */
             --divider-roses-1: url('images/divider-roses-1.jpg');
@@ -550,6 +549,25 @@
             margin: 15px auto 5px auto;
         }
 
+        .drive-button {
+            display: inline-block;
+            background-color: #34A853; /* Color de Google Drive */
+            color: var(--white);
+            padding: 15px 30px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 1.2em;
+            margin-top: 20px;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .drive-button:hover {
+            background-color: #2C8C46; /* Verde más oscuro */
+            transform: translateY(-3px);
+        }
+
         /* Footer */
         footer {
             background-color: var(--light-text-color);
@@ -560,7 +578,6 @@
             position: relative;
             z-index: 1; /* Asegura que el texto esté sobre cualquier fondo */
         }
-        /* No hay una decoración específica para el footer en este nuevo enfoque */
 
 
         /* Animaciones */
@@ -583,7 +600,7 @@
             #hero .date-location { font-size: 1.3em; }
             section { padding: 60px 15px; }
             .container { padding: 25px; }
-            .rsvp-button { padding: 12px 25px; font-size: 1em; }
+            .rsvp-button, .drive-button { padding: 12px 25px; font-size: 1em; }
             .story-item, .detail-item, .vestimenta-detalle { text-align: center; border-left: none; }
             .story-item::before { left: 50%; transform: translateX(-50%); top: -10px; }
             .countdown-item { font-size: 2.5em; gap: 15px; }
@@ -626,6 +643,11 @@
     </style>
 </head>
 <body>
+
+    <audio id="background-music" loop>
+        <source src="images/wedding_song.mp3" type="audio/mpeg">
+        Tu navegador no soporta el elemento de audio.
+    </audio>
 
     <div id="splash-screen">
         <div class="splash-content">
@@ -768,7 +790,9 @@
                 <div class="rsvp-photo-container">
                     <h3>¡Comparte tus fotos de la boda!</h3>
                     <p>Puedes compartir las fotos que tomes de la boda en nuestra carpeta de Google Drive. ¡Nos encantaría ver tus momentos favoritos!</p>
-                    <img src="images/rsvp-photo.jpg" alt="Espacio para foto de pareja de invitados" style="max-height: 200px; object-fit: cover;">
+                    <a href="https://drive.google.com/drive/folders/1H3gLN-JBnRjxshwfdx62IbERbS2IvX99?usp=sharing" target="_blank" class="drive-button">
+                        <i class="fab fa-google-drive"></i> Subir Fotos a Drive
+                    </a>
                 </div>
             </div>
         </section>
@@ -785,29 +809,42 @@
             const openButton = document.getElementById('open-invitation-button');
             const mainContent = document.getElementById('main-content');
             const storyImages = document.querySelectorAll('#historia .story-image');
-            const decorativeSeparators = document.querySelectorAll('.decorative-separator'); // Seleccionar todos los separadores
+            const decorativeSeparators = document.querySelectorAll('.decorative-separator');
+            const backgroundMusic = document.getElementById('background-music'); // Obtener el elemento de audio
 
             // Oculta el contenido principal al inicio
             mainContent.style.display = 'none';
 
             // Evento para el botón "Abrir Invitación"
             openButton.addEventListener('click', () => {
-                splashScreen.classList.add('hidden'); // Inicia la transición para ocultar
+                splashScreen.classList.add('hidden');
                 setTimeout(() => {
-                    splashScreen.style.display = 'none'; // Oculta completamente después de la transición
-                    mainContent.style.display = 'block'; // Muestra el contenido principal
-                    // Haz que la primera sección (hero) sea visible al cargar el contenido principal
+                    splashScreen.style.display = 'none';
+                    mainContent.style.display = 'block';
                     document.getElementById('hero').classList.add('visible');
-                    // Desplázate al inicio del contenido principal para evitar el salto
                     window.scrollTo(0, 0);
-                }, 1000); // Coincide con la duración de la transición de opacidad de splash-screen
+
+                    // Intentar reproducir la música al abrir la invitación
+                    const playPromise = backgroundMusic.play();
+                    if (playPromise !== undefined) {
+                        playPromise.then(() => {
+                            // La reproducción automática fue exitosa
+                            console.log('Música de fondo reproducida automáticamente.');
+                        }).catch(error => {
+                            // La reproducción automática fue bloqueada o falló
+                            console.log('La reproducción automática de música fue bloqueada o falló:', error);
+                            // Puedes añadir un icono de "play" o "mute" si quieres que el usuario la active manualmente
+                        });
+                    }
+
+                }, 1000);
             });
 
             // Smooth Scroll para los enlaces internos (si los hubiera)
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
                 anchor.addEventListener('click', function (e) {
                     e.preventDefault();
-                    if (mainContent.style.display === 'block') { // Solo si el contenido principal está visible
+                    if (mainContent.style.display === 'block') {
                         document.querySelector(this.getAttribute('href')).scrollIntoView({
                             behavior: 'smooth'
                         });
@@ -817,37 +854,35 @@
 
             // Función para añadir clase 'visible' a elementos al hacer scroll (para animaciones)
             const observerOptions = {
-                root: null, // viewport
+                root: null,
                 rootMargin: '0px',
-                threshold: 0.1 // Cuando el 10% del elemento es visible
+                threshold: 0.1
             };
 
             const elementObserver = new IntersectionObserver((entries, observer) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
                         entry.target.classList.add('visible');
-                        observer.unobserve(entry.target); // Dejar de observar una vez que sea visible
+                        observer.unobserve(entry.target);
                     }
                 });
             }, observerOptions);
 
-            // Observar todas las secciones (excepto hero, que ya es visible)
             document.querySelectorAll('main section:not(#hero)').forEach(section => {
                 elementObserver.observe(section);
             });
 
-            // Observar las imágenes de historia para la animación específica
             storyImages.forEach(img => {
                 elementObserver.observe(img);
             });
 
-            // Observar los separadores decorativos para su animación individual
             decorativeSeparators.forEach(separator => {
                 elementObserver.observe(separator);
             });
 
+
             // Countdown Timer
-            const weddingDate = new Date('January 04, 2026 17:00:00').getTime(); // 04 de enero de 2026, 5 PM
+            const weddingDate = new Date('January 04, 2026 17:00:00').getTime();
 
             const x = setInterval(function() {
                 const now = new Date().getTime();
