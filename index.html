@@ -7,32 +7,24 @@
 
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💖</text></svg>">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Montserrat:wght@300;400;700&family=Parisienne&display=swap" rel="stylesheet">
-
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
     <style>
         :root {
-            --primary-color: #f0f8ff; /* Azul cielo muy claro - para fondos alternos y bordes */
-            --secondary-color: #191970; /* Azul marino - para títulos, nombres y botones */
+            --primary-color: #f0f8ff;
+            --secondary-color: #191970;
             --text-color: #333;
             --light-text-color: #555;
             --white: #fff;
-            /* Rutas relativas a la carpeta 'images' */
-            --splash-screen-background: url('images/splash-background.jpg'); /* Fondo para la pantalla de bienvenida */
-            --hero-couple-photo: url('images/hero-background.jpg'); /* Foto de fondo de la sección principal */
-
-            /* Imágenes decorativas de ESQUINA - se mantienen */
-            --deco-corner-top-left: url('images/deco-corner-top-left.jpg'); /* Flores para esquina superior izquierda */
-
-            /* NUEVAS imágenes para los separadores */
+            --splash-screen-background: url('images/splash-background.jpg');
+            --hero-couple-photo: url('images/hero-background.jpg');
+            --deco-corner-top-left: url('images/deco-corner-top-left.jpg');
             --divider-roses-1: url('images/divider-roses-1.jpg');
             --divider-roses-2: url('images/divider-roses-2.jpg');
             --divider-roses-3: url('images/divider-roses-3.jpg');
             --divider-roses-4: url('images/divider-roses-4.jpg');
             --divider-roses-5: url('images/divider-roses-5.jpg');
         }
-
-        /* Asegúrate de que las imágenes mencionadas existan en la carpeta 'images' de tu repositorio */
 
         * {
             margin: 0;
@@ -82,11 +74,10 @@
             padding: 40px;
             border-radius: 10px;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-            position: relative; /* Para posicionar decoraciones internas */
-            z-index: 1; /* Asegura que el contenido esté sobre las decoraciones */
+            position: relative;
+            z-index: 1;
         }
 
-        /* Splash Screen */
         #splash-screen {
             position: fixed;
             top: 0;
@@ -97,7 +88,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            z-index: 9999; /* Asegura que cubra todo */
+            z-index: 9999;
             transition: opacity 1s ease-out, visibility 1s ease-out;
             flex-direction: column;
             overflow: hidden;
@@ -135,7 +126,7 @@
         .splash-content .names-signature {
             font-family: 'Parisienne', cursive;
             font-size: 4em;
-            color: var(--secondary-color); /* Azul marino para los nombres */
+            color: var(--secondary-color);
             margin-bottom: 30px;
             line-height: 1;
         }
@@ -160,11 +151,10 @@
         }
 
         .open-button:hover {
-            background-color: #000080; /* Azul marino más oscuro */
+            background-color: #000080;
             transform: translateY(-3px);
         }
 
-        /* Hero Section (Bienvenida) */
         #hero {
             height: 100vh;
             display: flex;
@@ -214,21 +204,20 @@
             font-family: 'Playfair Display', serif;
             font-size: 1.5em;
             font-weight: 400;
-            color: var(--secondary-color); /* Azul marino para la fecha y ubicación */
+            color: var(--secondary-color);
         }
 
-        /* Separadores Decorativos con las NUEVAS IMÁGENES */
         .decorative-separator {
             width: 100%;
-            height: 150px; /* Ajusta la altura según tus imágenes */
+            height: 150px;
             background-repeat: no-repeat;
             background-position: center center;
-            background-size: cover; /* o 'contain' si prefieres que la imagen completa se vea sin recortar */
+            background-size: cover;
             position: relative;
             z-index: 0;
-            opacity: 0; /* Inicia invisible para la animación */
-            transform: translateY(50px); /* Inicia ligeramente abajo para la animación */
-            transition: opacity 1s ease-out, transform 1s ease-out; /* Animación individual */
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 1s ease-out, transform 1s ease-out;
             margin-top: 60px;
             margin-bottom: 60px;
         }
@@ -238,7 +227,6 @@
             transform: translateY(0);
         }
 
-        /* Asignar diferentes imágenes a cada separador */
         .decorative-separator.sep-1 { background-image: var(--divider-roses-1); }
         .decorative-separator.sep-2 { background-image: var(--divider-roses-2); }
         .decorative-separator.sep-3 { background-image: var(--divider-roses-3); }
@@ -246,13 +234,12 @@
         .decorative-separator.sep-5 { background-image: var(--divider-roses-5); }
 
 
-        /* Historia de Amor */
         #historia {
-            background: var(--primary-color); /* Azul cielo muy claro */
+            background: var(--primary-color);
             padding-bottom: 80px;
             position: relative;
         }
-        #historia .container::before { /* Esquina superior izquierda */
+        #historia .container::before {
             content: '';
             position: absolute;
             top: -50px;
@@ -274,7 +261,7 @@
         .story-item {
             margin-bottom: 60px;
             padding: 20px;
-            border-left: 5px solid var(--primary-color); /* Azul cielo para el borde */
+            border-left: 5px solid var(--primary-color);
             text-align: left;
             position: relative;
         }
@@ -284,11 +271,11 @@
             left: -30px;
             top: 15px;
             font-size: 1.5em;
-            color: var(--secondary-color); /* Azul marino para el corazón */
+            color: var(--secondary-color);
         }
 
         .story-item h3 {
-            color: var(--secondary-color); /* Azul marino para el título */
+            color: var(--secondary-color);
             margin-bottom: 10px;
         }
 
@@ -299,23 +286,22 @@
 
         .story-item .story-image {
             width: 100%;
-            max-width: 480px; /* Tamaño máximo para las imágenes de historia aumentado */
+            max-width: 480px;
             height: auto;
             border-radius: 10px;
             margin: 20px auto;
             display: block;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            transition: transform 0.8s ease-out, opacity 0.8s ease-out; /* Transición más suave para la animación */
+            transition: transform 0.8s ease-out, opacity 0.8s ease-out;
             opacity: 0;
-            transform: translateY(30px) scale(0.95); /* Inicia ligeramente hacia abajo y más pequeño */
+            transform: translateY(30px) scale(0.95);
         }
         .story-item .story-image.visible {
             opacity: 1;
-            transform: translateY(0) scale(1); /* Aparece y vuelve al tamaño normal */
+            transform: translateY(0) scale(1);
         }
 
 
-        /* Cuenta Regresiva */
         #countdown {
             background: var(--white);
             padding: 80px 20px;
@@ -324,42 +310,45 @@
         #countdown .container {
             background: rgba(255, 255, 255, 0.95);
             position: relative;
-            z-index: 1; /* Asegura que el contenido esté sobre las decoraciones */
+            z-index: 1;
         }
-        /* No hay decoraciones específicas para #countdown aparte del separador de abajo */
-
 
         .countdown-timer {
             display: flex;
             justify-content: center;
-            gap: 30px;
+            gap: 20px;
             margin-top: 40px;
-            flex-wrap: wrap;
+            flex-wrap: nowrap;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            padding-bottom: 10px;
         }
 
         .countdown-item {
+            flex-shrink: 0;
             display: flex;
             flex-direction: column;
             align-items: center;
             font-family: 'Playfair Display', serif;
-            font-size: 3em; /* Tamaño base */
+            font-size: 3.5em;
             color: var(--text-color);
+            font-weight: bold;
         }
 
         .countdown-item span {
-            font-size: 0.4em;
+            font-size: 0.35em;
             text-transform: uppercase;
             color: var(--light-text-color);
             margin-top: 5px;
+            font-weight: normal;
         }
 
-        /* Detalles del Evento */
         #detalles {
             background: var(--primary-color);
             padding-bottom: 80px;
             position: relative;
         }
-        #detalles .container::after { /* Esquina inferior derecha */
+        #detalles .container::after {
             content: '';
             position: absolute;
             bottom: -50px;
@@ -367,7 +356,7 @@
             width: 200px;
             height: 200px;
             background: var(--deco-corner-top-left) no-repeat center center/contain;
-            transform: rotate(180deg); /* Para que apunte en la otra dirección */
+            transform: rotate(180deg);
             z-index: 0;
             opacity: 0.8;
         }
@@ -389,18 +378,34 @@
 
         .detail-item i {
             font-size: 3em;
-            color: var(--secondary-color); /* Azul marino para el icono */
+            color: var(--secondary-color);
             margin-bottom: 15px;
         }
 
         .detail-item h3 {
             margin-bottom: 10px;
             color: var(--light-text-color);
+            font-size: 2em;
         }
 
         .detail-item p {
-            font-size: 1.1em;
+            font-size: 1.25em;
             line-height: 1.8;
+            font-weight: bold;
+            color: var(--text-color);
+        }
+        .detail-item p strong {
+            color: var(--secondary-color);
+        }
+        .detail-item .time-info {
+            font-size: 1.4em;
+            font-weight: bold;
+            color: var(--secondary-color);
+        }
+        .detail-item .reception-info {
+            font-size: 1.4em;
+            font-weight: bold;
+            color: var(--secondary-color);
         }
 
         .location-map {
@@ -416,13 +421,31 @@
             margin-right: auto;
         }
 
-        /* Código de Vestimenta */
+        .map-button {
+            display: inline-block;
+            background-color: #4285F4;
+            color: var(--white);
+            padding: 15px 30px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 1.2em;
+            margin-top: 20px;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .map-button:hover {
+            background-color: #357ae8;
+            transform: translateY(-3px);
+        }
+
         #vestimenta {
             background: var(--primary-color);
             padding-bottom: 80px;
             position: relative;
         }
-        #vestimenta .container::before { /* Esquina superior derecha */
+        #vestimenta .container::before {
             content: '';
             position: absolute;
             top: -50px;
@@ -430,7 +453,7 @@
             width: 200px;
             height: 200px;
             background: var(--deco-corner-top-left) no-repeat center center/contain;
-            transform: rotate(90deg); /* Para que apunte hacia la derecha */
+            transform: rotate(90deg);
             z-index: 0;
             opacity: 0.8;
         }
@@ -442,7 +465,7 @@
         }
 
         #vestimenta h2 {
-            color: var(--secondary-color); /* Azul marino para el título */
+            color: var(--secondary-color);
             margin-bottom: 30px;
         }
 
@@ -463,7 +486,7 @@
         }
 
         .vestimenta-detalle img {
-            max-width: 150px; /* Ajustado para los iconos de vestimenta */
+            max-width: 150px;
             height: auto;
             opacity: 0.8;
             margin-bottom: 10px;
@@ -480,19 +503,81 @@
             line-height: 1.5;
             margin: 0;
         }
-        .vestimenta-detalle h3 { /* Para el título "Formal" */
+        .vestimenta-detalle h3 {
            color: var(--secondary-color);
            font-size: 1.6em;
            margin-top: 20px;
         }
 
-        /* Confirmación de Asistencia */
+        #contribucion {
+            background: var(--white);
+            padding-bottom: 80px;
+            position: relative;
+        }
+        #contribucion .container::before {
+            content: '';
+            position: absolute;
+            top: -50px;
+            left: -50px;
+            width: 200px;
+            height: 200px;
+            background: var(--deco-corner-top-left) no-repeat center center/contain;
+            transform: rotate(45deg);
+            z-index: 0;
+            opacity: 0.8;
+        }
+        #contribucion .container::after {
+            content: '';
+            position: absolute;
+            bottom: -50px;
+            right: -50px;
+            width: 200px;
+            height: 200px;
+            background: var(--deco-corner-top-left) no-repeat center center/contain;
+            transform: rotate(225deg);
+            z-index: 0;
+            opacity: 0.8;
+        }
+        #contribucion .container {
+             background: rgba(255, 255, 255, 0.95);
+             padding: 50px;
+             border-radius: 15px;
+        }
+        #contribucion h2 {
+            color: var(--secondary-color);
+            margin-bottom: 30px;
+        }
+        .contribution-info {
+            margin-top: 30px;
+            padding: 20px;
+            background-color: var(--primary-color);
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+        .contribution-info p {
+            font-size: 1.1em;
+            margin-bottom: 15px;
+            color: var(--text-color);
+        }
+        .contribution-info .bank-details {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4em;
+            font-weight: bold;
+            color: var(--secondary-color);
+            margin-top: 10px;
+            padding: 10px;
+            background-color: var(--white);
+            border-radius: 5px;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+            display: inline-block;
+        }
+
         #rsvp {
             background: var(--primary-color);
             padding-bottom: 80px;
             position: relative;
         }
-        #rsvp .container::after { /* Esquina inferior izquierda */
+        #rsvp .container::after {
             content: '';
             position: absolute;
             bottom: -50px;
@@ -500,7 +585,7 @@
             width: 200px;
             height: 200px;
             background: var(--deco-corner-top-left) no-repeat center center/contain;
-            transform: rotate(-90deg); /* Para que apunte hacia la izquierda */
+            transform: rotate(-90deg);
             z-index: 0;
             opacity: 0.8;
         }
@@ -514,7 +599,7 @@
 
         .rsvp-button {
             display: inline-block;
-            background-color: var(--secondary-color); /* Azul marino para el botón */
+            background-color: var(--secondary-color);
             color: var(--white);
             padding: 15px 30px;
             border-radius: 5px;
@@ -527,7 +612,7 @@
         }
 
         .rsvp-button:hover {
-            background-color: #000080; /* Azul marino más oscuro */
+            background-color: #000080;
             transform: translateY(-3px);
         }
 
@@ -551,7 +636,7 @@
 
         .drive-button {
             display: inline-block;
-            background-color: #34A853; /* Color de Google Drive */
+            background-color: #34A853;
             color: var(--white);
             padding: 15px 30px;
             border-radius: 5px;
@@ -564,11 +649,10 @@
         }
 
         .drive-button:hover {
-            background-color: #2C8C46; /* Verde más oscuro */
+            background-color: #2C8C46;
             transform: translateY(-3px);
         }
 
-        /* Footer */
         footer {
             background-color: var(--light-text-color);
             color: var(--white);
@@ -576,11 +660,9 @@
             padding: 20px;
             font-size: 0.9em;
             position: relative;
-            z-index: 1; /* Asegura que el texto esté sobre cualquier fondo */
+            z-index: 1;
         }
 
-
-        /* Animaciones */
         @keyframes fadeIn {
             from { opacity: 0; }
             to { opacity: 1; }
@@ -591,7 +673,6 @@
             to { transform: translateY(0); opacity: 1; }
         }
 
-        /* Media Queries para Responsividad */
         @media (max-width: 768px) {
             h1 { font-size: 2.8em; }
             h2 { font-size: 2em; }
@@ -600,23 +681,33 @@
             #hero .date-location { font-size: 1.3em; }
             section { padding: 60px 15px; }
             .container { padding: 25px; }
-            .rsvp-button, .drive-button { padding: 12px 25px; font-size: 1em; }
+            .rsvp-button, .drive-button, .map-button { padding: 12px 25px; font-size: 1em; }
             .story-item, .detail-item, .vestimenta-detalle { text-align: center; border-left: none; }
             .story-item::before { left: 50%; transform: translateX(-50%); top: -10px; }
-            .countdown-item { font-size: 2.5em; gap: 15px; }
-            .story-item .story-image { max-width: 90%; }
-            .decorative-separator { margin-top: 40px; margin-bottom: 40px; height: 100px; /* Ajuste para móviles */ }
+            .countdown-item { font-size: 3em; gap: 15px; }
+            .countdown-item span { font-size: 0.4em; }
+            .story-item .story-image { max-width: 95%; }
+            .decorative-separator { margin-top: 40px; margin-bottom: 40px; height: 100px; }
             .vestimenta-info { flex-direction: column; align-items: center; }
             .vestimenta-detalle { margin: 20px 0; }
-            /* Ajustes para decoraciones en móvil */
             #historia .container::before, #historia .container::after,
-            #detalles .container::after, #vestimenta .container::before, #rsvp .container::after {
+            #detalles .container::after, #vestimenta .container::before, #rsvp .container::after,
+            #contribucion .container::before, #contribucion .container::after {
                 width: 100px;
                 height: 100px;
                 top: -30px;
                 left: -30px;
                 right: -30px;
                 bottom: -30px;
+            }
+            .detail-item p {
+                font-size: 1.1em;
+            }
+            .detail-item .time-info, .detail-item .reception-info {
+                font-size: 1.2em;
+            }
+            .countdown-timer {
+                justify-content: space-around;
             }
         }
 
@@ -629,15 +720,23 @@
             section { padding: 40px 10px; }
             .container { padding: 20px; }
             .splash-content .names-signature { font-size: 3em; }
-            .countdown-item { font-size: 1.8em; }
+            .countdown-item { font-size: 2.2em; }
             .countdown-item span { font-size: 0.5em; }
-            .decorative-separator { height: 80px; } /* Más pequeño en móviles */
+            .decorative-separator { height: 80px; }
+            .detail-item h3 {
+                font-size: 1.6em;
+            }
+            .detail-item p {
+                font-size: 1em;
+            }
+            .detail-item .time-info, .detail-item .reception-info {
+                font-size: 1.1em;
+            }
         }
 
-        /* Ajustes para datos del calendario/countdown en pantallas pequeñas */
         @media (max-width: 600px) {
-            .countdown-item { font-size: 2.2em; }
-            .countdown-item span { font-size: 0.6em; }
+            .countdown-item { font-size: 2.8em; }
+            .countdown-item span { font-size: 0.5em; }
             .detail-item p { font-size: 1.05em; }
         }
     </style>
@@ -731,27 +830,29 @@
                 <h2>Detalles del Evento</h2>
                 <div class="detail-item">
                     <i class="fas fa-calendar-alt"></i>
-                    <h3>Fecha y Hora</h3>
-                    <p>Domingo, 04 de enero del 2026</p>
-                    <p>Ceremonia: 5 PM</p>
-                    <p>Recepción: 7 PM</p>
+                    <h3 style="color: var(--secondary-color);">Fecha y Hora</h3>
+                    <p style="font-size: 1.4em; color: var(--text-color);">Domingo, 04 de enero del 2026</p>
+                    <p class="time-info">CEREMONIA RELIGIOSA: 5 PM</p>
+                    <p class="reception-info">RECEPCIÓN: 7 PM</p>
                 </div>
                 <div class="detail-item">
                     <i class="fas fa-map-marker-alt"></i>
-                    <h3>Ubicación</h3>
-                    <p><strong>Finca Montebello</strong></p>
+                    <h3 style="color: var(--secondary-color);">Ubicación</h3>
+                    <p style="font-size: 1.4em; color: var(--text-color);"><strong>Finca Montebello</strong></p>
                     <p>Cd Valles-Antiguo Morelos 3109, Lomas del Real,</p>
                     <p>79028 Cdad. Valles, S.L.P., México</p>
                     <iframe
                         class="location-map"
-                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3706.448879434879!2d-98.99519834644245!3d22.023602944924832!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d79231ff48baad%3A0x7c7941d08f9139a0!2sFinca%20Montebello!5e0!3m2!1ses-419!2smx!4v1703188928109!5m2!1ses-419!2smx"
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3725.1278184564887!2d-98.99520907495852!3d22.02348359351957!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d5673024503759%3A0x6d36e7a2b97c2763!2sFinca%20Montebello!5e0!3m2!1ses-419!2smx!4v1693894073380!5m2!1ses-419!2smx"
                         width="600"
                         height="450"
                         style="border:0;"
                         allowfullscreen=""
                         loading="lazy"
                         referrerpolicy="no-referrer-when-downgrade"></iframe>
-                    <small>Haga clic en el mapa para ver la ubicación exacta en Google Maps</small>
+                    <a href="https://www.google.com/maps/dir/?api=1&destination=22.02348359351957,-98.99520907495852" target="_blank" class="map-button">
+                        <i class="fas fa-map-marked-alt"></i> Abrir Mapa
+                    </a>
                 </div>
             </div>
         </section>
@@ -778,12 +879,28 @@
 
         <div class="decorative-separator sep-5"></div>
 
+        <section id="contribucion">
+            <div class="container">
+                <h2>Contribución de Amor</h2>
+                <div class="contribution-info">
+                    <p>¡Su presencia es nuestro mayor regalo!</p>
+                    <p>Para aquellos que deseen hacernos un regalo, hemos habilitado una opción para contribuir a nuestro futuro juntos.</p>
+                    <p>Agradecemos sinceramente su generosidad.</p>
+                    <p class="bank-details">
+                        BBVA: 4152 3144 2000 8305 (Número de Tarjeta)
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <div class="decorative-separator sep-1"></div>
+
         <section id="rsvp">
             <div class="container">
                 <h2>Confirmación de Asistencia</h2>
                 <p>¡Su presencia es el mejor regalo! Por favor, ayúdennos a planificar nuestro gran día confirmando su asistencia.</p>
                 <p>Agradecemos su pronta respuesta.</p>
-                <a href="https://wa.me/524811565106?text=Quiero%20confirmar%20mi%20asistencia%20a%20la%20boda%20de%20Alexandra%20%26%20Emilio%20el%2004%20de%20enero%20del%202026" target="_blank" class="rsvp-button">
+                <a href="https://wa.me/524811565106?text=Quiero%20confirmar%20mi%20asistencia%20a%20la%20boda%20de%20Alexandra%20%26%20Emilio%20el%2004%20de%20enero%20del%202026%0ANombre:" target="_blank" class="rsvp-button">
                     Confirmar Asistencia vía WhatsApp
                 </a>
                 <p style="margin-top: 20px; font-size: 0.9em;">Fecha límite para confirmar: 7 de Noviembre de 2025</p>
@@ -810,12 +927,10 @@
             const mainContent = document.getElementById('main-content');
             const storyImages = document.querySelectorAll('#historia .story-image');
             const decorativeSeparators = document.querySelectorAll('.decorative-separator');
-            const backgroundMusic = document.getElementById('background-music'); // Obtener el elemento de audio
+            const backgroundMusic = document.getElementById('background-music');
 
-            // Oculta el contenido principal al inicio
             mainContent.style.display = 'none';
 
-            // Evento para el botón "Abrir Invitación"
             openButton.addEventListener('click', () => {
                 splashScreen.classList.add('hidden');
                 setTimeout(() => {
@@ -824,23 +939,18 @@
                     document.getElementById('hero').classList.add('visible');
                     window.scrollTo(0, 0);
 
-                    // Intentar reproducir la música al abrir la invitación
                     const playPromise = backgroundMusic.play();
                     if (playPromise !== undefined) {
                         playPromise.then(() => {
-                            // La reproducción automática fue exitosa
                             console.log('Música de fondo reproducida automáticamente.');
                         }).catch(error => {
-                            // La reproducción automática fue bloqueada o falló
                             console.log('La reproducción automática de música fue bloqueada o falló:', error);
-                            // Puedes añadir un icono de "play" o "mute" si quieres que el usuario la active manualmente
                         });
                     }
 
                 }, 1000);
             });
 
-            // Smooth Scroll para los enlaces internos (si los hubiera)
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
                 anchor.addEventListener('click', function (e) {
                     e.preventDefault();
@@ -852,7 +962,6 @@
                 });
             });
 
-            // Función para añadir clase 'visible' a elementos al hacer scroll (para animaciones)
             const observerOptions = {
                 root: null,
                 rootMargin: '0px',
@@ -881,7 +990,6 @@
             });
 
 
-            // Countdown Timer
             const weddingDate = new Date('January 04, 2026 17:00:00').getTime();
 
             const x = setInterval(function() {
